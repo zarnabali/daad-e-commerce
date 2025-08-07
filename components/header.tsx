@@ -100,7 +100,14 @@ export default function Header() {
 
         {/* Logo - Centered for both mobile and desktop */}
         <div className="absolute left-1/2 -translate-x-1/2 z-10">
-          <Image src="/logo2.png" alt="Logo" width={170} height={60} priority />
+          <Image 
+            src="/logo2.png" 
+            alt="Logo" 
+            width={170} 
+            height={60} 
+            priority 
+            className="w-24 h-auto md:w-[170px]"
+          />
         </div>
 
         {/* Right Icons and Login */}
