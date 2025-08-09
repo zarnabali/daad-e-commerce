@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { useSearchParams } from "next/navigation"
 import Header from "../../components/header"
 import Footer from "../../components/footer"
@@ -188,7 +188,7 @@ Care Instructions:
   }
 }
 
-export default function ProductDetailPage() {
+function ProductDetailContent() {
   const searchParams = useSearchParams()
   const [product, setProduct] = useState<Product | null>(null)
   const [loading, setLoading] = useState(true)
@@ -205,35 +205,37 @@ export default function ProductDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
-        </div>
-        <Footer />
+      <div className="flex items-center justify-center h-96">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
       </div>
     )
   }
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-white">
-        <Header />
-        <div className="flex items-center justify-center h-96">
-          <div className="text-center">
-            <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
-            <p className="text-gray-600">The product you're looking for doesn't exist.</p>
-          </div>
+      <div className="flex items-center justify-center h-96">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold mb-4">Product Not Found</h1>
+          <p className="text-gray-600">The product you're looking for doesn't exist.</p>
         </div>
-        <Footer />
       </div>
     )
   }
 
+  return <ProductDetail product={product} />
+}
+
+export default function ProductDetailPage() {
   return (
     <div className="min-h-screen bg-white">
       <Header />
-      <ProductDetail product={product} />
+      <Suspense fallback={
+        <div className="flex items-center justify-center h-96">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-black"></div>
+        </div>
+      }>
+        <ProductDetailContent />
+      </Suspense>
       <Footer />
     </div>
   )
