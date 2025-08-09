@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { Instagram, Facebook, Youtube, Twitter } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -91,17 +92,37 @@ export default function Footer() {
         <div className="flex flex-col items-start" ref={socialLinksRef}>
           <h3 className="font-bold text-lg mb-4">Our Social Media</h3>
           <ul className="space-y-2 text-gray-600">
-            <li><Link href="#" className="hover:underline">Instagram</Link></li>
-            <li><Link href="#" className="hover:underline">Facebook</Link></li>
-            <li><Link href="#" className="hover:underline">Youtube</Link></li>
-            <li><Link href="#" className="hover:underline">Twitter</Link></li>
+            <li>
+              <Link href="#" className="hover:underline flex items-center gap-2">
+                <Instagram className="w-4 h-4" />
+                Instagram
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="hover:underline flex items-center gap-2">
+                <Facebook className="w-4 h-4" />
+                Facebook
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="hover:underline flex items-center gap-2">
+                <Youtube className="w-4 h-4" />
+                Youtube
+              </Link>
+            </li>
+            <li>
+              <Link href="#" className="hover:underline flex items-center gap-2">
+                <Twitter className="w-4 h-4" />
+                Twitter
+              </Link>
+            </li>
           </ul>
         </div>
       </div>
 
       {/* Bottom Bar */}
       <div ref={bottomBarRef} className="bg-black text-white text-sm py-4 px-4 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center">
-        <p className="mb-2 md:mb-0">© 2023 daad Production</p>
+        <p className="mb-2 md:mb-0">© 2023 Tulos Production</p>
         <div className="flex space-x-4">
           <Link href="#" className="hover:underline">Terms & Conditions</Link>
           <Link href="#" className="hover:underline">Privacy Policy</Link>

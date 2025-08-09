@@ -2,13 +2,26 @@
 
 import Link from "next/link"
 import { Search, ShoppingBag, Menu, X } from 'lucide-react'
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isSearchOpen, setIsSearchOpen] = useState(false)
+
+  // Handle escape key to close search
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isSearchOpen) {
+        setIsSearchOpen(false)
+      }
+    }
+
+    document.addEventListener('keydown', handleEscape)
+    return () => document.removeEventListener('keydown', handleEscape)
+  }, [isSearchOpen])
 
   return (
     <header className="w-full ">
@@ -112,17 +125,66 @@ export default function Header() {
 
         {/* Right Icons and Login */}
         <div className="flex items-center gap-6 pr-4 md:pr-8">
-          <button aria-label="Search">
+          <button 
+            aria-label="Search"
+            onClick={() => setIsSearchOpen(!isSearchOpen)}
+            className="hover:opacity-70 transition-opacity"
+          >
             <Search className="h-5 w-5" />
           </button>
-          <button aria-label="Shopping Bag">
+          <Link href="/cart" aria-label="Shopping Bag" className="hover:opacity-70 transition-opacity">
             <ShoppingBag className="h-5 w-5" />
-          </button>
+          </Link>
           <Link href="#" className="hidden md:block text-sm font-medium hover:underline underline-offset-4">
             Login
           </Link>
         </div>
       </nav>
+
+      {/* Search Bar - Appears below navigation when opened */}
+      {isSearchOpen && (
+        <div className="w-full bg-white border-t border-gray-200 px-4 py-3 md:px-10 md:py-4">
+          <div className="max-w-4xl mx-auto">
+            <div className="relative">
+              <input
+                type="text"
+                placeholder="Search for products..."
+                className="w-full h-10 md:h-12 pl-4 pr-12 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-transparent text-sm md:text-base"
+                autoFocus
+              />
+              <button 
+                className="absolute right-3 top-1/2 -translate-y-1/2 p-1 hover:bg-gray-100 rounded-full transition-colors"
+                onClick={() => setIsSearchOpen(false)}
+                aria-label="Close search"
+              >
+                <X className="h-4 w-4 md:h-5 md:w-5" />
+              </button>
+            </div>
+            
+            {/* Search Suggestions (Optional) */}
+            <div className="mt-3 md:mt-4">
+              <p className="text-xs md:text-sm text-gray-500 mb-2">Popular searches:</p>
+              <div className="flex flex-wrap gap-2">
+                <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs md:text-sm text-gray-700 transition-colors">
+                  T-shirts
+                </button>
+                <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs md:text-sm text-gray-700 transition-colors">
+                  Jeans
+                </button>
+                <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs md:text-sm text-gray-700 transition-colors">
+                  Sneakers
+                </button>
+                <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs md:text-sm text-gray-700 transition-colors">
+                  Dresses
+                </button>
+                <button className="px-3 py-1 bg-gray-100 hover:bg-gray-200 rounded-full text-xs md:text-sm text-gray-700 transition-colors">
+                  Jackets
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </header>
   )
 }
