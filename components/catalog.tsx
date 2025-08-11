@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Button } from "@/components/ui/button"
+import { ShoppingCart } from "lucide-react"
 import {
   Select,
   SelectContent,
@@ -22,6 +23,7 @@ type Product = {
   price: string
   priceValue: number
   image: string
+  image2: string
   type: "Shirts" | "Pants" | "Shoes" | "Glasses"
 }
 
@@ -31,18 +33,18 @@ type CatalogProps = {
 }
 
 const defaultProducts: Product[] = [
-  { id: 1, title: "Loro Piana", subtitle: "Slim-Fit Silk & Linen Polo Shirt", price: "$45", priceValue: 45, image: "/images/product-polo.png", type: "Shirts" },
-  { id: 2, title: "White Pants", subtitle: "Slim Fit man pants", price: "$90", priceValue: 90, image: "/images/product-pants.png", type: "Pants" },
-  { id: 3, title: "Bidha Glasses", subtitle: "Black glasses with luxury finishing", price: "$50", priceValue: 50, image: "/images/product-glasses.png", type: "Glasses" },
-  { id: 4, title: "Leather Shoes Jack", subtitle: "Men leather shoes", price: "$89", priceValue: 89, image: "/images/product-boots.png", type: "Shoes" },
-  { id: 5, title: "Grey T-shirt", subtitle: "Unisex grey t-shirt", price: "$21", priceValue: 21, image: "/images/product-tshirt.png", type: "Shirts" },
-  { id: 6, title: "Brown Bomber", subtitle: "Luxury unisex bomber jacket", price: "$52", priceValue: 52, image: "/images/product-bomber.png", type: "Shirts" },
-  { id: 7, title: "Chino Pants", subtitle: "Stretch cotton chinos", price: "$64", priceValue: 64, image: "/images/product-pants.png", type: "Pants" },
-  { id: 8, title: "Aviator Shades", subtitle: "Premium metal frame", price: "$72", priceValue: 72, image: "/images/product-glasses.png", type: "Glasses" },
-  { id: 9, title: "Derby Shoes", subtitle: "Full-grain leather", price: "$120", priceValue: 120, image: "/images/product-boots.png", type: "Shoes" },
-  { id: 10, title: "Oxford Shirt", subtitle: "Classic cotton", price: "$40", priceValue: 40, image: "/images/product-polo.png", type: "Shirts" },
-  { id: 11, title: "Lounge Pants", subtitle: "Soft jersey", price: "$38", priceValue: 38, image: "/images/product-pants.png", type: "Pants" },
-  { id: 12, title: "Square Frame", subtitle: "Acetate frame", price: "$58", priceValue: 58, image: "/images/product-glasses.png", type: "Glasses" },
+  { id: 1, title: "Loro Piana", subtitle: "Slim-Fit Silk & Linen Polo Shirt", price: "$45", priceValue: 45, image: "/images/product-polo.png", image2: "/images/product-polo.png", type: "Shirts" },
+  { id: 2, title: "White Pants", subtitle: "Slim Fit man pants", price: "$90", priceValue: 90, image: "/images/product-pants.jpg", image2: "/images/product-pants.jpg", type: "Pants" },
+  { id: 3, title: "Bidha Glasses", subtitle: "Black glasses with luxury finishing", price: "$50", priceValue: 50, image: "/images/product-glasses.jpg", image2: "/images/product-glasses-2.jpg", type: "Glasses" },
+  { id: 4, title: "Leather Shoes Jack", subtitle: "Men leather shoes", price: "$89", priceValue: 89, image: "/images/product-boots.jpg", image2: "/images/product-boots-2.jpg", type: "Shoes" },
+  { id: 5, title: "Grey T-shirt", subtitle: "Unisex grey t-shirt", price: "$21", priceValue: 21, image: "/images/product-tshirt.png", image2: "/images/product-tshirt.png", type: "Shirts" },
+  { id: 6, title: "Brown Bomber", subtitle: "Luxury unisex bomber jacket", price: "$52", priceValue: 52, image: "/images/product-bomber.png", image2: "/images/product-bomber.png", type: "Shirts" },
+  { id: 7, title: "Chino Pants", subtitle: "Stretch cotton chinos", price: "$64", priceValue: 64, image: "/images/product-glasses.jpg", image2: "/images/product-glasses-2.jpg", type: "Pants" },
+  { id: 8, title: "Aviator Shades", subtitle: "Premium metal frame", price: "$72", priceValue: 72, image: "/images/product-glasses.jpg", image2: "/images/product-glasses-2.jpg", type: "Glasses" },
+  { id: 9, title: "Derby Shoes", subtitle: "Full-grain leather", price: "$120", priceValue: 120, image: "/images/product-boots.jpg", image2: "/images/product-boots-2.jpg", type: "Shoes" },
+  { id: 10, title: "Oxford Shirt", subtitle: "Classic cotton", price: "$40", priceValue: 40, image: "/images/product-glasses.jpg", image2: "/images/product-glasses-2.jpg", type: "Shirts" },
+  { id: 11, title: "Lounge Pants", subtitle: "Soft jersey", price: "$38", priceValue: 38, image: "/images/product-pants.jpg", image2: "/images/product-glasses.jpg", type: "Pants" },
+  { id: 12, title: "Square Frame", subtitle: "Acetate frame", price: "$58", priceValue: 58, image: "/images/product-glasses.jpg", image2: "/images/product-glasses-2.jpg", type: "Glasses" },
 ]
 
 export default function Catalog({
@@ -234,15 +236,31 @@ export default function Catalog({
 
       <div ref={cardsRef} className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-8">
         {filtered.map((product) => (
-          <div key={product.id} className="catalog-card bg-white rounded-xl overflow-hidden flex flex-col">
-            <div className="relative w-full h-44 md:h-64 lg:h-72">
+          <div key={product.id} className="catalog-card bg-white rounded-xl overflow-hidden flex flex-col group cursor-pointer">
+            <div className="relative w-full h-44 md:h-64 lg:h-72 overflow-hidden">
+              {/* First Image */}
               <Image
                 src={product.image || "/placeholder.svg?height=400&width=400&query=ecommerce%20product"}
                 alt={product.title}
                 fill
                 sizes="(max-width: 1024px) 50vw, 25vw"
-                className="object-cover rounded-t-xl"
+                className="object-cover rounded-t-xl transition-transform duration-700 ease-out group-hover:scale-105"
               />
+              {/* Second Image - Slides in from left on hover */}
+              <Image
+                src={product.image2 || product.image || "/placeholder.svg?height=400&width=400&query=ecommerce%20product"}
+                alt={product.title}
+                fill
+                sizes="(max-width: 1024px) 50vw, 25vw"
+                className="object-cover rounded-t-xl absolute inset-0 transform translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-0"
+              />
+              
+              {/* Add to Cart Icon - Appears on hover */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white transition-colors duration-200 cursor-pointer">
+                  <ShoppingCart className="h-5 w-5 text-black" />
+                </div>
+              </div>
             </div>
             <div className="p-4 flex flex-col flex-grow">
               <h3 className="text-base md:text-lg font-semibold mb-1">{product.title}</h3>

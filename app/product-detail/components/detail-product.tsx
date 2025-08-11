@@ -4,12 +4,109 @@ import { useState, useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { X, ChevronLeft, ChevronRight, Plus, Minus, Star, MapPin, Calendar, Award, Shield, Truck, RotateCcw } from "lucide-react"
 import { useSearchParams } from "next/navigation"
+import ProductReviews from "./product-reviews"
 
 // Size chart images - using placeholder paths that you can replace with actual images
 const sizeChartImages = [
   "/images/size-chart-1.jpg",
   "/images/size-chart-2.jpg", 
   "/images/care-instructions.jpg"
+]
+
+// Sample reviews data
+const sampleReviews = [
+  {
+    _id: "review1",
+    customerName: "Sarah Johnson",
+    rating: 5,
+    date: "2024-01-15",
+    title: "Perfect fit and quality!",
+    comment: "This polo shirt exceeded my expectations. The material is incredibly soft and the fit is perfect. I've already ordered another one in a different color. Highly recommend!",
+    helpful: 12,
+    verified: true,
+    images: ["/images/product-polo.png"]
+  },
+  {
+    _id: "review2",
+    customerName: "Michael Chen",
+    rating: 4,
+    date: "2024-01-10",
+    title: "Great quality, slight sizing issue",
+    comment: "The shirt is well-made and the fabric feels premium. I ordered my usual size but it runs slightly small. Would recommend sizing up if you're between sizes.",
+    helpful: 8,
+    verified: true
+  },
+  {
+    _id: "review3",
+    customerName: "Emily Rodriguez",
+    rating: 5,
+    date: "2024-01-08",
+    title: "Absolutely love it!",
+    comment: "This is now my favorite polo shirt. The color is exactly as shown, the material is breathable, and it looks professional. Perfect for both casual and business settings.",
+    helpful: 15,
+    verified: true,
+    images: ["/images/product-polo.png", "/images/product-bomber.png"]
+  },
+  {
+    _id: "review4",
+    customerName: "David Thompson",
+    rating: 4,
+    date: "2024-01-05",
+    title: "Good value for money",
+    comment: "Solid quality polo shirt. The fabric is comfortable and it washes well. The price point is reasonable for the quality you get. Will definitely buy more from this brand.",
+    helpful: 6,
+    verified: true
+  },
+  {
+    _id: "review5",
+    customerName: "Lisa Wang",
+    rating: 5,
+    date: "2024-01-02",
+    title: "Exceptional quality and service",
+    comment: "Not only is the shirt amazing quality, but the customer service was outstanding. Had a small issue with my order and they resolved it immediately. The shirt fits perfectly and looks great!",
+    helpful: 9,
+    verified: true
+  }
+]
+
+// Sample vendor products data
+const sampleVendorProducts = [
+  {
+    _id: "vendor1",
+    name: "Premium Cotton Polo Shirt",
+    price: 55,
+    image: "/images/product-polo.png",
+    image2: "/images/product-polo.png",
+    rating: 4.8,
+    reviewCount: 127
+  },
+  {
+    _id: "vendor2",
+    name: "Luxury Silk Blend Shirt",
+    price: 89,
+    image: "/images/product-tshirt.png",
+    image2: "/images/product-tshirt.png",
+    rating: 4.6,
+    reviewCount: 89
+  },
+  {
+    _id: "vendor3",
+    name: "Classic Oxford Button-Down",
+    price: 72,
+    image: "/images/product-bomber.png",
+    image2: "/images/product-bomber.png",
+    rating: 4.7,
+    reviewCount: 156
+  },
+  {
+    _id: "vendor4",
+    name: "Slim Fit Dress Shirt",
+    price: 68,
+    image: "/images/product-polo.png",
+    image2: "/images/product-polo.png",
+    rating: 4.5,
+    reviewCount: 94
+  }
 ]
 
 interface Product {
@@ -1269,6 +1366,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
       )}
+      
+      {/* Product Reviews and Vendor Products */}
+      <ProductReviews
+        productId={product._id}
+        productName={product.name}
+        averageRating={4.6}
+        totalReviews={sampleReviews.length}
+        reviews={sampleReviews}
+        vendorProducts={sampleVendorProducts}
+      />
       
       <SizeChartModal />
       <VendorDetails />

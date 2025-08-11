@@ -39,25 +39,25 @@ export default function Footer() {
   }, [])
 
   return (
-    <footer ref={footerRef} className="w-full bg-white pt-16">
+    <footer ref={footerRef} className="w-full bg-black text-white pt-16">
       <div className="max-w-7xl mx-auto px-4 md:px-8 lg:px-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 pb-12">
         {/* Logo and Newsletter */}
         <div className="flex flex-col items-start md:col-span-2 lg:col-span-1" ref={logoRef}>
           <div className="mb-4">
             <Image
-              src="/logo2.png"
-              alt="TULOS Logo"
+              src="/logo-white.png"
+              alt="daad Logo"
               width={200}
               height={100}
               className=" w-auto"
             />
           </div>
-          <p className="text-gray-600 mb-4">
+          <p className="text-white mb-4">
             Get newsletter update for upcoming product and best discount for all item
           </p>
           <div className="flex w-full max-w-sm" ref={newsletterRef}>
-            <Input type="email" placeholder="Your Email" className="flex-grow rounded-r-none" />
-            <Button className="bg-black text-white rounded-l-none px-6 hover:bg-gray-800 transition-colors">
+            <Input type="email" placeholder="Your Email" className="flex-grow rounded-r-none text-white" />
+            <Button className="bg-white text-black rounded-l-none px-6 hover:bg-gray-600 transition-colors">
               Submit
             </Button>
           </div>
@@ -66,7 +66,7 @@ export default function Footer() {
         {/* Product Links */}
         <div className="flex flex-col items-start" ref={productLinksRef}>
           <h3 className="font-bold text-lg mb-4">Product</h3>
-          <ul className="space-y-2 text-gray-600">
+          <ul className="space-y-2 text-white">
             <li><Link href="#" className="hover:underline">Tshirt</Link></li>
             <li><Link href="#" className="hover:underline">Jacket</Link></li>
             <li><Link href="#" className="hover:underline">Shoes</Link></li>
@@ -79,7 +79,7 @@ export default function Footer() {
         {/* Categories Links */}
         <div className="flex flex-col items-start" ref={categoryLinksRef}>
           <h3 className="font-bold text-lg mb-4">Categories</h3>
-          <ul className="space-y-2 text-gray-600">
+          <ul className="space-y-2 text-white">
             <li><Link href="#" className="hover:underline">Man</Link></li>
             <li><Link href="#" className="hover:underline">Woman</Link></li>
             <li><Link href="#" className="hover:underline">Kids</Link></li>
@@ -91,7 +91,7 @@ export default function Footer() {
         {/* Social Media Links */}
         <div className="flex flex-col items-start" ref={socialLinksRef}>
           <h3 className="font-bold text-lg mb-4">Our Social Media</h3>
-          <ul className="space-y-2 text-gray-600">
+          <ul className="space-y-2 text-white">
             <li>
               <Link href="#" className="hover:underline flex items-center gap-2">
                 <Instagram className="w-4 h-4" />
@@ -121,8 +121,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div ref={bottomBarRef} className="bg-black text-white text-sm py-4 px-4 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center">
-        <p className="mb-2 md:mb-0">© 2023 Tulos Production</p>
+      <div ref={bottomBarRef} className="bg-white text-black text-sm py-4 px-4 md:px-8 lg:px-12 flex flex-col md:flex-row justify-between items-center">
+        <p className="mb-2 md:mb-0">© 2025 DaaD Production</p>
         <div className="flex space-x-4">
           <Link href="#" className="hover:underline">Terms & Conditions</Link>
           <Link href="#" className="hover:underline">Privacy Policy</Link>

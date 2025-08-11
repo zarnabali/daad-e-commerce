@@ -3,7 +3,8 @@ import Hero from "@/components/hero"
 import NewCollection from "@/components/new-collection"
 import CallToAction from "@/components/call-to-action"
 import Categories from "@/components/categories"
-import Footer from "@/components/footer" // Import the new Footer component
+import Footer from "@/components/footer"
+import ScrollToTop from "@/components/scroll-to-top"
 
 export default function LandingPage() {
   return (
@@ -16,8 +17,9 @@ export default function LandingPage() {
           <CallToAction />
           <Categories />
         </main>
-        <Footer /> {/* Render the Footer component */}
+        <Footer />
       </div>
+      <ScrollToTop />
     </div>
   )
 }

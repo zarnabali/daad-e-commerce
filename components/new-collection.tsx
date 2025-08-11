@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ShoppingCart } from "lucide-react"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -125,6 +126,13 @@ export default function NewCollection() {
                 objectFit="cover"
                 className="rounded-t-xl absolute inset-0 transform translate-x-full transition-transform duration-700 ease-out group-hover:translate-x-0"
               />
+              
+              {/* Add to Cart Icon - Appears on hover */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-all duration-300 ease-in-out">
+                <div className="bg-white/90 backdrop-blur-sm rounded-full p-3 shadow-lg hover:bg-white transition-colors duration-200 cursor-pointer">
+                  <ShoppingCart className="h-5 w-5 text-black" />
+                </div>
+              </div>
             </div>
             <div className="p-4 flex flex-col flex-grow">
               <h3 className="text-lg font-semibold mb-1">{product.name}</h3>

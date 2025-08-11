@@ -2,6 +2,7 @@ import Header from "../../components/header"
 import Footer from "../../components/footer"
 import CategoryHero from "../../components/category-hero"
 import Catalog from "../../components/catalog"
+import ScrollToTop from "../../components/scroll-to-top"
 
 export default function WomenPage() {
   return (
@@ -19,6 +20,7 @@ export default function WomenPage() {
         </main>
         <Footer />
       </div>
+      <ScrollToTop />
     </div>
   )
 }

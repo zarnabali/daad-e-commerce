@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { useEffect, useRef } from "react"
 import { gsap } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import Link from "next/link"
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -12,17 +13,20 @@ const categories = [
   {
     id: 1,
     name: "MAN",
-    image: "/images/category-man.jpg", // Using the provided web image
+    image: "/images/category-man.jpg", 
+    href:"/men"// Using the provided web image
   },
   {
     id: 2,
     name: "WOMAN",
-    image: "/images/category-woman.jpg", // Placeholder for woman
+    image: "/images/category-woman.jpg",
+    href: "/womens" // Placeholder for woman
   },
   {
     id: 3,
     name: "KIDS",
-    image: "/images/category-kids.jpg", // Placeholder for kids
+    image: "/images/category-kids.jpg", 
+    href: "/kids" // Placeholder for kids
   },
 ]
 
@@ -55,28 +59,33 @@ export default function Categories() {
     <section ref={sectionRef} className="w-full px-4 md:px-8 lg:px-12 pt-10 pb-16 ">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {categories.map((category, index) => (
-          <div
+          <Link
             key={category.id}
-            ref={(el) => {
-              categoryRefs.current[index] = el
-            }}
-            className="relative w-full h-96 rounded-xl overflow-hidden flex items-end p-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-black/20 hover:scale-105 cursor-pointer group"
+            href={category.href}
+            className="block"
           >
-            <Image
-              src={category.image || "/placeholder.svg"}
-              alt={category.name}
-              layout="fill"
-              objectFit="cover"
-              quality={100}
-              className="rounded-xl z-0 transition-all duration-300 ease-in-out group-hover:shadow-2xl group-hover:shadow-black/30"
-            />
-            <div className="relative z-10 flex flex-col items-start text-white">
-              <h3 className="text-4xl font-bold mb-4">{category.name}</h3>
-              <Button className="bg-white text-black px-6 py-2 rounded-full text-base font-semibold hover:bg-gray-200 transition-colors">
-                See Details
-              </Button>
+            <div
+              ref={(el) => {
+                categoryRefs.current[index] = el
+              }}
+              className="relative w-full h-96 rounded-xl overflow-hidden flex items-end p-6 transition-all duration-300 ease-in-out hover:shadow-2xl hover:shadow-black/20 hover:scale-105 cursor-pointer group"
+            >
+              <Image
+                src={category.image || "/placeholder.svg"}
+                alt={category.name}
+                layout="fill"
+                objectFit="cover"
+                quality={100}
+                className="rounded-xl z-0 transition-all duration-300 ease-in-out group-hover:shadow-2xl group-hover:shadow-black/30"
+              />
+              <div className="relative z-10 flex flex-col items-start text-white">
+                <h3 className="text-4xl font-bold mb-4">{category.name}</h3>
+                <Button className="bg-white text-black px-6 py-2 rounded-full text-base font-semibold hover:bg-gray-200 transition-colors">
+                  See Details
+                </Button>
+              </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>

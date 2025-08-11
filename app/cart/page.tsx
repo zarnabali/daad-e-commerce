@@ -7,6 +7,7 @@ import Link from 'next/link'
 import Header from "../../components/header"
 import Footer from "../../components/footer"
 import YouMayAlsoLike from "./components/YouMayAlsoLike"
+import ScrollToTop from "../../components/scroll-to-top"
 
 // Hardcoded cart products
 const initialCartProducts = [
@@ -304,6 +305,7 @@ const Cart = () => {
         </div>
       </div>
       <Footer />
+      <ScrollToTop />
     </div>
   )
 }

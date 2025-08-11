@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation"
 import Header from "../../components/header"
 import Footer from "../../components/footer"
 import ProductDetail from "./components/detail-product"
+import ScrollToTop from "../../components/scroll-to-top"
 
 // Product type definition
 interface Product {
@@ -237,6 +238,7 @@ export default function ProductDetailPage() {
         <ProductDetailContent />
       </Suspense>
       <Footer />
+      <ScrollToTop />
     </div>
   )
 }
